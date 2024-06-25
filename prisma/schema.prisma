@@ -8,7 +8,51 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id             Int              @id @default(autoincrement())
+  email          String           @unique
+  name           String?
+  age            Int?            
+  responses      Response[]
+  questionnaires QuestionnaireUser[]
+}
+
+model Question {
+  id               Int      @id @default(autoincrement())
+  text             String
+  importance       Int?     
+  fieldType        String   @default("input")
+  predefinedAnswers String[] // Tableau de chaînes pour les réponses prédéfinies
+  questionnaire    Questionnaire? @relation(fields: [questionnaireId], references: [id])
+  questionnaireId  Int?
+  responses        Response[]
+}
+
+model Response {
+  id              Int          @id @default(autoincrement())
+  questionId      Int
+  questionnaireId Int
+  userId          Int
+  answer          String
+  question        Question     @relation(fields: [questionId], references: [id])
+  questionnaire   Questionnaire @relation(fields: [questionnaireId], references: [id])
+  user            User         @relation(fields: [userId], references: [id])
+}
+
+model Questionnaire {
+  id            Int              @id @default(autoincrement())
+  title         String
+  description   String?
+  questions     Question[]
+  responses     Response[]
+  users         QuestionnaireUser[]
+}
+
+model QuestionnaireUser {
+  userId         Int
+  questionnaireId Int
+  assignedAt     DateTime @default(now())
+  user           User         @relation(fields: [userId], references: [id])
+  questionnaire  Questionnaire @relation(fields: [questionnaireId], references: [id])
+
+  @@id([userId, questionnaireId])
 }
