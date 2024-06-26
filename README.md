@@ -25,7 +25,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 Installer OLLAMA
 
 ```bash
-ollama run mistral
+    ollama run mistral
 ```
 
 http://localhost:11434/api/generate
@@ -33,11 +33,11 @@ http://localhost:11434/api/generate
 ## Prisma
 
 ```bash
-npx prisma generate
-npx prisma migrate dev
+    npx prisma generate
+    npx prisma migrate dev
 
-# to open prisma adminer
-npx prisma studio
+    # to open prisma adminer
+    npx prisma studio
 ```
 
 ## Run seeds
