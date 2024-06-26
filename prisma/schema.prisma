@@ -8,39 +8,39 @@ datasource db {
 }
 
 model User {
-  id            Int           @id @default(autoincrement())
-  email         String        @unique
-  name          String?
-  responses     Response[]
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  name      String?
+  responses Response[]
 }
 
 model Questionnaire {
-  id            Int           @id @default(autoincrement())
-  title         String
-  description   String?
-  questions     Question[]
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?
+  questions   Question[]
 }
 
 model Question {
   id              Int           @id @default(autoincrement())
   text            String
   questionnaireId Int
-  questionnaire   Questionnaire  @relation(fields: [questionnaireId], references: [id])
   choices         Choice[]
+  questionnaire   Questionnaire @relation(fields: [questionnaireId], references: [id])
 }
 
 model Choice {
-  id          Int       @id @default(autoincrement())
-  text        String
-  questionId  Int
-  question    Question   @relation(fields: [questionId], references: [id])
-  responses   Response[]
+  id         Int        @id @default(autoincrement())
+  text       String
+  questionId Int
+  question   Question   @relation(fields: [questionId], references: [id])
+  responses  Response[]
 }
 
 model Response {
-  id        Int       @id @default(autoincrement())
-  userId    Int
-  user      User      @relation(fields: [userId], references: [id])
-  choiceId  Int
-  choice    Choice    @relation(fields: [choiceId], references: [id])
+  id       Int    @id @default(autoincrement())
+  userId   Int
+  choiceId Int
+  choice   Choice @relation(fields: [choiceId], references: [id])
+  user     User   @relation(fields: [userId], references: [id])
 }
