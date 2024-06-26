@@ -1,0 +1,86 @@
+[
+  [
+    {
+      "id": 1,
+      "bot": "Salut ! Comment tu te sens aujourd'hui après ton opération ?",
+      "client": "Salut, je suis un peu fatigué mais ça va mieux qu'hier."
+    },
+    {
+      "id": 2,
+      "bot": "Est-ce que tu as ressenti une douleur particulière ou quelque chose d'inconfortable aujourd'hui ?",
+      "client": "Ouais, j'ai senti une douleur là où ils m'ont opéré, surtout quand je bouge."
+    },
+    {
+      "id": 3,
+      "bot": "Merci pour ton retour. Sur une échelle de 1 à 10, à quel point évalues-tu cette douleur ?",
+      "client": "Je dirais autour de 6."
+    },
+    {
+      "id": 4,
+      "bot": "Ok. Tu as pris tes médocs contre la douleur comme ils t'ont dit ?",
+      "client": "Oui, je les ai pris ce matin."
+    },
+    {
+      "id": 5,
+      "bot": "Super. T'as pu manger normalement aujourd'hui ?",
+      "client": "Oui, aucun problème pour manger."
+    },
+    {
+      "id": 6,
+      "bot": "Parfait. T'as remarqué quelque chose d'anormal comme une rougeur, un gonflement ou de la chaleur près de l'incision ?",
+      "client": "Non, tout semble normal de ce côté-là."
+    },
+    {
+      "id": 7,
+      "bot": "Cool. T'as des questions ou des trucs qui te tracassent concernant ton rétablissement ?",
+      "client": "Non, je pense que tout va bien pour le moment."
+    },
+    {
+      "id": 8,
+      "bot": "Génial. On te rappelle demain pour voir comment ça évolue. Si y'a un problème urgent, appelle ton médecin. Passe une bonne journée !",
+      "client": "Merci, à plus !"
+    }
+  ],
+  [
+    {
+      "id": 1,
+      "bot": "Bonjour, comment vous sentez-vous aujourd'hui après votre opération ?",
+      "client": "Bonjour, je me sens un peu fatigué mais ça va mieux qu'hier."
+    },
+    {
+      "id": 2,
+      "bot": "Avez-vous ressenti une douleur particulière ou un inconfort aujourd'hui ?",
+      "client": "Oui, j'ai ressenti une douleur au niveau de l'incision, surtout en bougeant."
+    },
+    {
+      "id": 3,
+      "bot": "Merci pour votre retour. Sur une échelle de 1 à 10, comment évalueriez-vous cette douleur ?",
+      "client": "Je dirais que c'est autour de 6."
+    },
+    {
+      "id": 4,
+      "bot": "D'accord. Avez-vous pris vos médicaments contre la douleur comme prescrit ?",
+      "client": "Oui, j'ai pris les médicaments ce matin."
+    },
+    {
+      "id": 5,
+      "bot": "Parfait. Avez-vous pu manger normalement aujourd'hui ?",
+      "client": "Oui, j'ai pu manger sans problème."
+    },
+    {
+      "id": 6,
+      "bot": "Très bien. Avez-vous remarqué une rougeur, un gonflement ou une chaleur inhabituelle autour de l'incision ?",
+      "client": "Non, tout semble normal de ce côté-là."
+    },
+    {
+      "id": 7,
+      "bot": "C'est rassurant. Avez-vous des questions ou des préoccupations concernant votre rétablissement ?",
+      "client": "Non, je crois que tout va bien pour l'instant."
+    },
+    {
+      "id": 8,
+      "bot": "Excellent. Nous vous recontacterons demain pour un nouveau suivi. En cas de problème urgent, n'hésitez pas à appeler votre médecin. Bonne journée !",
+      "client": "Merci, bonne journée à vous aussi !"
+    }
+  ]
+]
