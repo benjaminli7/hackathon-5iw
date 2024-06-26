@@ -1,16 +1,19 @@
+"use client";
 import Answer from "@/app/questionnaires/components/Answer";
-import Question from "@/app/questionnaires/components/Question";
-import { Paper } from "@mantine/core";
+import { Flex, Paper, Radio, Stack } from "@mantine/core";
 
-function QuestionAnswer() {
+function QuestionAnswer({ form, question, index }) {
   return (
     <Paper withBorder shadow="xs" p="xl">
-      <Question />
-
-      <Answer />
-      <Answer />
-      <Answer />
-      <Answer />
+      <Stack>
+        <Radio.Group name={question.text} label={question.text} withAsterisk>
+          <Flex direction="column" mt="xs" gap={12}>
+            {question.choices.map((choice) => (
+              <Answer key={choice.id} choice={choice} form={form} index={index} />
+            ))}
+          </Flex>
+        </Radio.Group>
+      </Stack>
     </Paper>
   );
 }

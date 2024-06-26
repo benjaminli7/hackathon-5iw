@@ -1,8 +1,9 @@
+import { Title } from '@mantine/core'
 import React from 'react'
 
-function Question() {
+function Question({ question }) {
   return (
-    <div>Question</div>
+    <Title order={3}>{question.text}</Title>
   )
 }
 

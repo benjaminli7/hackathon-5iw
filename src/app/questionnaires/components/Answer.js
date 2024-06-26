@@ -1,9 +1,19 @@
-import React from 'react'
+import { Radio } from "@mantine/core";
 
-function Answer() {
+function Answer({ form, choice, index }) {
   return (
-    <div>Answer</div>
-  )
+    <Radio
+      value={`${choice.id}`}
+      label={choice.text}
+      onChange={() => {
+        form.setFieldValue(`responses.${index}`, {
+          questionId: choice.questionId,
+          answer: choice.text,
+          choiceId: choice.id,
+        });
+      }}
+    />
+  );
 }
 
-export default Answer
+export default Answer;

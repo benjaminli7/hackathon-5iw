@@ -1,21 +1,10 @@
-import QuestionAnswer from "@/app/questionnaires/components/QuestionAnswer";
-import { Stack, Title } from "@mantine/core";
+import { getQuestionnaire } from "@/api/questionnaire";
+import QuestionnaireForm from "@/app/questionnaires/components/QuestionnaireForm";
 
-function Questionnaire({ params }) {
+async function Questionnaire({ params }) {
   const questionnaireId = params.id;
-  return (
-    <>
-      <Stack>
-        <Title>Questionnaire {questionnaireId}</Title>
-
-        <Stack>
-          <QuestionAnswer />
-          <QuestionAnswer />
-          <QuestionAnswer />
-        </Stack>
-      </Stack>
-    </>
-  );
+  const questionnaire = await getQuestionnaire(questionnaireId);
+  return <QuestionnaireForm questionnaire={questionnaire} />;
 }
 
 export default Questionnaire;
