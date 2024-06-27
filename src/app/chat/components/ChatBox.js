@@ -4,13 +4,12 @@ import { useState, useEffect, useRef } from 'react';
 import { ScrollArea, TextInput, Button, Box, Stack, Text } from '@mantine/core';
 import { postMsg } from '@/api/messages';
 
-const ChatBox = ({ phoneNumber, initialMessages = [], userName }) => {
+const ChatBox = ({ userId, initialMessages = [], userName }) => {
     const [messages, setMessages] = useState(initialMessages);
     const [input, setInput] = useState('');
     const scrollAreaRef = useRef(null);
 
     useEffect(() => {
-        // Scroll to bottom when messages change
         if (scrollAreaRef.current) {
             scrollAreaRef.current.scrollTo({
                 top: scrollAreaRef.current.scrollHeight,
@@ -30,7 +29,7 @@ const ChatBox = ({ phoneNumber, initialMessages = [], userName }) => {
         setMessages([...messages, newMessage]);
 
         try {
-            await postMsg(phoneNumber, input, userName);
+            await postMsg(userId, input, userName);
             setInput('');
         } catch (error) {
             console.error('Failed to send message:', error);
