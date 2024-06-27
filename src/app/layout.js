@@ -1,6 +1,8 @@
 // Import styles of packages that you've installed.
 // All packages except `@mantine/hooks` require styles imports
 import "@mantine/core/styles.css";
+import { Notifications } from "@mantine/notifications";
+import "@mantine/notifications/styles.css";
 import "./globals.css";
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
@@ -18,6 +20,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <MantineProvider defaultColorScheme="dark">
+          <Notifications />
           <main className="container py-3 mx-auto">{children}</main>
         </MantineProvider>
       </body>

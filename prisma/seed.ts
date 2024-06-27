@@ -69,7 +69,7 @@ async function main() {
   await prisma.response.create({
     data: {
       userId: user.id,
-      choiceId: (await prisma.choice.findFirst({ where: { text: '4', question: { text: 'Comment évalueriez-vous votre douleur sur une échelle de 1 à 4 ?' } } }))?.id!
+      choiceId: (await prisma.choice.findFirst({ where: { text: '1', question: { text: 'Comment évalueriez-vous votre douleur sur une échelle de 1 à 4 ?' } } }))?.id!
     },
   });
 

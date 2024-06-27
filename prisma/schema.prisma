@@ -29,8 +29,8 @@ model Question {
   id              Int           @id @default(autoincrement())
   text            String
   questionnaireId Int
-  questionnaire   Questionnaire @relation(fields: [questionnaireId], references: [id])
   choices         Choice[]
+  questionnaire   Questionnaire @relation(fields: [questionnaireId], references: [id])
 }
 
 model Choice {
@@ -44,9 +44,9 @@ model Choice {
 model Response {
   id       Int    @id @default(autoincrement())
   userId   Int
-  user     User   @relation(fields: [userId], references: [id])
   choiceId Int
   choice   Choice @relation(fields: [choiceId], references: [id])
+  user     User   @relation(fields: [userId], references: [id])
 }
 
 model Message {
