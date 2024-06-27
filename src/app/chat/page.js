@@ -6,12 +6,13 @@ export default async function Page() {
     const phoneNumber = '1234567890'; // Change this number dynamically if necessary
     const user = await getMsg(phoneNumber);
     const messages = user ? user.messages : [];
+    const userName = user ? user.name : 'Anonymous';
 
     return (
         <Container size="xl" style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)', border: '1px solid #ccc', padding: '20px' }}>
                 <Title align="center" order={1} mb="lg">Chat Page</Title>
-                <ChatBox phoneNumber={phoneNumber} initialMessages={messages} />
+                <ChatBox phoneNumber={phoneNumber} initialMessages={messages} userName={userName} />
             </div>
         </Container>
     );

@@ -8,14 +8,14 @@ datasource db {
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   phoneNumber String     @unique
-  email     String?    @unique
-  name      String?
-  responses Response[]
-  messages  Message[]
-  age       Int?
-  isEstimated  Boolean @default(false)
+  email       String?    @unique
+  name        String?
+  responses   Response[]
+  messages    Message[]
+  age         Int?
+  isEstimated Boolean    @default(false)
 }
 
 model Questionnaire {
@@ -59,9 +59,9 @@ model Message {
   timestamp DateTime @default(now())
 }
 
-model ConversationScript{
-  id        Int      @id @default(autoincrement())
-  operation String   @unique
+model ConversationScript {
+  id        Int    @id @default(autoincrement())
+  operation String
   order     Int
   content   String
 }

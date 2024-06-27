@@ -3,12 +3,10 @@ import prisma from "../../lib/prisma";
 import { cache } from "react";
 
 export const getMsg = cache(async (phoneNumber) => {
-  console.log(phoneNumber);
   const user = await prisma.user.findUnique({
     where: { phoneNumber },
     include: { messages: true },
   });
-  console.log(user);
   return user;
 });
 
@@ -28,6 +26,7 @@ export const postMsg = cache(async (phoneNumber, content, sender) => {
       userId: user.id,
       sender,
       content,
+      contentIA: '',
     },
   });
 
