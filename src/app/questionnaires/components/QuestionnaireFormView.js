@@ -21,7 +21,8 @@ function QuestionnaireFormView({ questionnaire }) {
       responses: [],
     },
   });
-
+  const isYoung = false;
+  console.log("young", isYoung)
   const handleSubmit = async (values) => {
     if (values.responses.length !== questionsLength) {
       setError({
@@ -59,8 +60,8 @@ function QuestionnaireFormView({ questionnaire }) {
     }
     setLoading(false);
   };
-
   return (
+
     <>
       {!success ? (
         <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
@@ -93,6 +94,7 @@ function QuestionnaireFormView({ questionnaire }) {
         </Center>
       )}
     </>
+
   );
 }
 
