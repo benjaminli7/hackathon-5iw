@@ -7,6 +7,7 @@ async function main() {
   const user = await prisma.user.create({
     data: {
       email: 'patient@example.com',
+      phoneNumber: '+33612345678',
       name: 'Jean Dupont'
     },
   });
@@ -68,7 +69,7 @@ async function main() {
   await prisma.response.create({
     data: {
       userId: user.id,
-      choiceId: (await prisma.choice.findFirst({ where: { text: '5', question: { text: 'Comment évalueriez-vous votre douleur sur une échelle de 1 à 10 ?' } } }))?.id!
+      choiceId: (await prisma.choice.findFirst({ where: { text: '4', question: { text: 'Comment évalueriez-vous votre douleur sur une échelle de 1 à 4 ?' } } }))?.id!
     },
   });
 
@@ -92,6 +93,37 @@ async function main() {
       choiceId: (await prisma.choice.findFirst({ where: { text: 'Oui', question: { text: 'Pouvez-vous marcher sans assistance ?' } } }))?.id!
     },
   });
+
+
+  // creation d'un script de conversation pour une opération du genoux
+  const script = [
+    {
+      "operation": "genoux",
+      "order": 1,
+      "content" :  "Bonjour, suite à votre opération du genoux nous souhaitons prendre de vos nouvelles. Ensuite nous vous enverrons un questionnaire pour évaluer votre état de santé."
+    },
+    {
+      "operation": "genoux",
+      "order": 2,
+      "content" :  "Comment allez vous depuis votre opération ?"
+    },
+    {
+      "operation": "genoux",
+      "order": 3,
+      "content" :  "Avez vous pris le rendez vous avec le kiné ?"
+    }
+  ]
+  
+  for(const content of script){
+    await prisma.conversationScript.create({
+      data: {
+        operation: content.operation,
+        order: content.order,
+        content: content.content
+      }
+    })
+  }
+
 
   console.log('La base de données a été initialisée. 🌱');
 }

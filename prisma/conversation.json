@@ -3,27 +3,27 @@
     {
       "id": 1,
       "bot": "Bonjour, comment vous sentez-vous aujourd'hui après votre opération ?",
-      "client": "Salut, je me sens bien reposé aujourd'hui."
+      "client": "Salut ça va tranquille et toi ?"
     },
     {
       "id": 2,
       "bot": "Avez-vous ressenti une douleur particulière ou un inconfort aujourd'hui ?",
-      "client": "Nan pas de douleur."
+      "client": "g mal au genoux "
     },
     {
       "id": 3,
       "bot": "Merci pour votre retour. Sur une échelle de 1 à 10, comment évalueriez-vous cette douleur ?",
-      "client": "1"
+      "client": "2"
     },
     {
       "id": 4,
       "bot": "D'accord. Avez-vous pris vos médicaments contre la douleur comme prescrit ?",
-      "client": "Ouai c'est fait."
+      "client": "ouai c bon"
     },
     {
       "id": 5,
       "bot": "Parfait. Avez-vous pu manger normalement aujourd'hui ?",
-      "client": "Oui, j'ai pu manger sans problème."
+      "client": "Oui"
     },
     {
       "id": 6,
@@ -33,12 +33,12 @@
     {
       "id": 7,
       "bot": "C'est rassurant. Avez-vous des questions ou des préoccupations concernant votre rétablissement ?",
-      "client": "Non, je ne m'inquiète de rien pour le moment."
+      "client": "Non rien "
     },
     {
       "id": 8,
       "bot": "Excellent. Nous vous recontacterons demain pour un nouveau suivi. En cas de problème urgent, n'hésitez pas à appeler votre médecin. Bonne journée !",
-      "client": "Merci au revoir"
+      "client": "merci"
     }
   ],
   [

@@ -9,10 +9,13 @@ datasource db {
 
 model User {
   id        Int        @id @default(autoincrement())
-  email     String     @unique
+  phoneNumber String     @unique
+  email     String?    @unique
   name      String?
   responses Response[]
   messages  Message[]
+  age       Int? 
+  isEstimated  Boolean @default(false)
 }
 
 model Questionnaire {
@@ -52,5 +55,13 @@ model Message {
   user      User     @relation(fields: [userId], references: [id])
   sender    String
   content   String
-  timestamp DateTime @default(now())
+  contentIA String 
+  timestamp DateTime @default(now()) 
+}
+
+model ConversationScript{
+  id        Int      @id @default(autoincrement())
+  operation String   @unique
+  order     Int
+  content   String
 }

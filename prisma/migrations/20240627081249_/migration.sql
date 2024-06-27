@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "age" INTEGER,
+ADD COLUMN     "isEstimated" INTEGER NOT NULL DEFAULT 0;
