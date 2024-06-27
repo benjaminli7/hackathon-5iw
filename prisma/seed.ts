@@ -7,7 +7,8 @@ async function main() {
   const user = await prisma.user.create({
     data: {
       email: 'patient1@example.com',
-      name: 'John Doe'
+      name: 'John Doe',
+      phoneNumber: '123-456-7890'
     },
   });
 
@@ -93,14 +94,50 @@ async function main() {
     },
   });
 
-  console.log('La base de données a été initialisée. 🌱');
+  // Exemples de messages de l'utilisateur
+  await prisma.message.createMany({
+    data: [
+      {
+        userId: user.id,
+        sender: 'John Doe',
+        content: 'Bonjour, j\'ai quelques questions concernant mon traitement.',
+        timestamp: new Date()
+      },
+      {
+        userId: user.id,
+        sender: 'John Doe',
+        content: 'Je ressens encore une douleur après l\'opération.',
+        timestamp: new Date()
+      },
+      {
+        userId: user.id,
+        sender: 'Bot',
+        content: 'Bonjour John, pouvez-vous préciser l\'intensité de la douleur sur une échelle de 1 à 10 ?',
+        timestamp: new Date()
+      },
+      {
+        userId: user.id,
+        sender: 'John Doe',
+        content: 'Je dirais que c\'est environ 7.',
+        timestamp: new Date()
+      },
+      {
+        userId: user.id,
+        sender: 'Bot',
+        content: 'Merci pour votre retour, nous allons ajuster votre traitement en conséquence.',
+        timestamp: new Date()
+      }
+    ]
+  });
+
+  console.log('La base de données a été initialisée avec des utilisateurs, des réponses et des messages. 🌱');
 }
 
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+    .catch((e) => {
+      console.error(e);
+      process.exit(1);
+    })
+    .finally(async () => {
+      await prisma.$disconnect();
+    });

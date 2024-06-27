@@ -8,11 +8,12 @@ datasource db {
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
-  email     String?     @unique
-  name      String?
-  responses Response[]
-  messages  Message[]
+  id          Int        @id @default(autoincrement())
+  phoneNumber String     @unique
+  email       String?    @unique
+  name        String?
+  responses   Response[]
+  messages    Message[]
 }
 
 model Questionnaire {

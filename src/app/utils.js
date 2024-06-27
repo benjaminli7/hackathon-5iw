@@ -33,9 +33,9 @@ export const setEstimatedAgeFromPrompt = cache(async (discussion, name) => {
         role: "user",
         // response_format: { type: "json_object" },
         content: `Estime l'âge de la personne en fonction de cette discussions ${JSON.stringify(
-          vieux
+            vieux
         )} ${
-          name ? "dans cette conversation le client s'appelle " + name : ""
+            name ? "dans cette conversation le client s'appelle " + name : ""
         } Répond obligatoirement par l'age de la personne ne dit pas que tu ne sais pas si tu ne sait pas éstime l'age de la personne, tu dois ne donner que l'age de la personne dans la réponse par exemple: 45`,
       },
     ],
@@ -44,7 +44,7 @@ export const setEstimatedAgeFromPrompt = cache(async (discussion, name) => {
   const age = response.choices[0]?.message?.content;
   const ageMatch = age.match(/\b\d+\b ans/i);
   const estimatedAge = ageMatch ? parseInt(ageMatch[0]) : parseInt(age);
-  
+
 
   return estimatedAge;
 });
@@ -55,6 +55,7 @@ export const changeBotAnswerFromUserInfo = cache(async (answer, name) => {
     where: {
       name: name,
     },
+  });
   });
 
   const response = await openai.chat.completions.create({
