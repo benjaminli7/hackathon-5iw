@@ -61,7 +61,7 @@ model Message {
 
 model ConversationScript{
   id        Int      @id @default(autoincrement())
-  operation String   @unique
+  operation String  
   order     Int
   content   String
 }
