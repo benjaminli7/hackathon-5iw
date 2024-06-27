@@ -9,7 +9,7 @@ import { IconInfoCircle } from "@tabler/icons-react";
 import { parseAsInteger, useQueryState } from "nuqs";
 import { useState } from "react";
 
-function QuestionnaireFormView({ questionnaire }) {
+function QuestionnaireFormView({ questionnaire, userAge }) {
   const [id, setId] = useQueryState("id", parseAsInteger.withDefault(null));
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
