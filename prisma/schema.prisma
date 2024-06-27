@@ -59,8 +59,8 @@ model Message {
   timestamp DateTime @default(now())
 }
 
-model ConversationScript {
-  id        Int    @id @default(autoincrement())
+model ConversationScript{
+  id        Int      @id @default(autoincrement())
   operation String
   order     Int
   content   String
