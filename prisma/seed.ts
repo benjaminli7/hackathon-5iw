@@ -6,8 +6,8 @@ async function main() {
   // Créer un utilisateur
   const user = await prisma.user.create({
     data: {
-      email: 'patient@example.com',
-      name: 'Jean Dupont'
+      email: 'patient1@example.com',
+      name: 'John Doe'
     },
   });
 
@@ -68,7 +68,7 @@ async function main() {
   await prisma.response.create({
     data: {
       userId: user.id,
-      choiceId: (await prisma.choice.findFirst({ where: { text: '5', question: { text: 'Comment évalueriez-vous votre douleur sur une échelle de 1 à 10 ?' } } }))?.id!
+      choiceId: (await prisma.choice.findFirst({ where: { text: '1', question: { text: 'Comment évalueriez-vous votre douleur sur une échelle de 1 à 4 ?' } } }))?.id!
     },
   });
 

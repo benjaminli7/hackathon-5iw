@@ -9,13 +9,7 @@ export default async function Home() {
 
   return (
     <Stack>
-      {users.map((user) => (
-        <div key={user.id}>
-          {user.name} <br />
-          {user.email}
-          <Button>Get age</Button>
-        </div>
-      ))}
+      hello world
     </Stack>
   );
 }
