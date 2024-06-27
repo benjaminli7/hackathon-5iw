@@ -193,6 +193,8 @@ export const fakeScenario = cache(async (phone) => {
     const answer = await changeBotAnswerFromUserInfo(message.content, user);
     console.log("Le bot aidé par l'IA a répondu  ", answer);
   }
+
+  console.log("localhost:3000/questionnaires/1/answer?id=" + user.id);
 });
 
 // getAgeFromPrompt("Salut, comment ça va ?", "Robert").then((res) => {

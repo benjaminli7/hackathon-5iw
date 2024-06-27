@@ -9,7 +9,7 @@ import { IconInfoCircle } from "@tabler/icons-react";
 import { parseAsInteger, useQueryState } from "nuqs";
 import { useState } from "react";
 
-function QuestionnaireFormView({ questionnaire }) {
+function QuestionnaireFormView({ questionnaire, userAge }) {
   const [id, setId] = useQueryState("id", parseAsInteger.withDefault(null));
   const [loading, setLoading] = useState(false);
 
@@ -37,7 +37,7 @@ function QuestionnaireFormView({ questionnaire }) {
       });
       return;
     }
-    setLoading(true)
+    setLoading(true);
     const responses = values.responses.map((response) => {
       return {
         questionId: response.questionId,
@@ -55,7 +55,7 @@ function QuestionnaireFormView({ questionnaire }) {
         color: "green",
       });
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   return (
