@@ -1,84 +1,106 @@
 import { PrismaClient } from '@prisma/client';
-import fs from 'fs/promises';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  try {
-    // Read questions from JSON file
-    const data = await fs.readFile(__dirname+'/questionnaire.json', 'utf8');
-    const questions = JSON.parse(data);
+  // Créer un utilisateur
+  const user = await prisma.user.create({
+    data: {
+      email: 'patient1@example.com',
+      name: 'John Doe'
+    },
+  });
 
-    // Seed users
-    const users = [
-      {
-        email: "test@test.fr",
-        name: "Test",
-        age: 25,
-      },
-    ];
+  // Créer un questionnaire
+  const questionnaire = await prisma.questionnaire.create({
+    data: {
+      title: 'Questionnaire Post-Opératoire Chirurgie du Genou',
+      description: 'Ce questionnaire vise à recueillir les retours des patients après une chirurgie du genou.',
+      questions: {
+        create: [
+          {
+            text: 'Comment évalueriez-vous votre douleur sur une échelle de 1 à 4 ?',
+            choices: {
+              create: [
+                { text: '1' },
+                { text: '2' },
+                { text: '3' },
+                { text: '4' },
+              ]
+            }
+          },
+          {
+            text: 'Êtes-vous satisfait de l\'amplitude de mouvement de votre genou ?',
+            choices: {
+              create: [
+                { text: 'Très insatisfait' },
+                { text: 'Insatisfait' },
+                { text: 'Neutre' },
+                { text: 'Satisfait' },
+                { text: 'Très satisfait' }
+              ]
+            }
+          },
+          {
+            text: 'Avez-vous ressenti un gonflement du genou ?',
+            choices: {
+              create: [
+                { text: 'Oui' },
+                { text: 'Non' }
+              ]
+            }
+          },
+          {
+            text: 'Pouvez-vous marcher sans assistance ?',
+            choices: {
+              create: [
+                { text: 'Oui' },
+                { text: 'Non' }
+              ]
+            }
+          }
+        ]
+      }
+    },
+  });
 
-    for (const user of users) {
-      await prisma.user.create({ data: user });
-    }
+  // Exemples de réponses de l'utilisateur
+  await prisma.response.create({
+    data: {
+      userId: user.id,
+      choiceId: (await prisma.choice.findFirst({ where: { text: '1', question: { text: 'Comment évalueriez-vous votre douleur sur une échelle de 1 à 4 ?' } } }))?.id!
+    },
+  });
 
-    // Seed questions
-    // create a questionnaire
-    await prisma.questionnaire.create({
-      data: {
-        title: "Questionnaire de santé",
-        description: "Questionnaire de santé pour évaluer la douleur au genou",
-        questions: {
-          create: questions,
-        },
-      },
-    });
+  await prisma.response.create({
+    data: {
+      userId: user.id,
+      choiceId: (await prisma.choice.findFirst({ where: { text: 'Satisfait', question: { text: 'Êtes-vous satisfait de l\'amplitude de mouvement de votre genou ?' } } }))?.id!
+    },
+  });
 
+  await prisma.response.create({
+    data: {
+      userId: user.id,
+      choiceId: (await prisma.choice.findFirst({ where: { text: 'Non', question: { text: 'Avez-vous ressenti un gonflement du genou ?' } } }))?.id!
+    },
+  });
 
-    // Seed responses
-    // const responses = [
-    //   {
-    //     questionId: 1,
-    //     questionnaireId: 1,
-    //     userId: 1,
-    //     answer: "Légère douleur",
-    //   },
-    //   {
-    //     questionId: 2,
-    //     questionnaireId: 1,
-    //     userId: 1,
-    //     answer: "Oui, je peux plier mon genou sans douleur",
-    //   },
-    //   {
-    //     questionId: 3,
-    //     questionnaireId: 1,
-    //     userId: 1,
-    //     answer: "Non, pas de gonflement",
-    //   }
-    // ];
+  await prisma.response.create({
+    data: {
+      userId: user.id,
+      choiceId: (await prisma.choice.findFirst({ where: { text: 'Oui', question: { text: 'Pouvez-vous marcher sans assistance ?' } } }))?.id!
+    },
+  });
 
-    // for (const response of responses) {
-    //   await prisma.response.create({
-    //     data: {
-    //       questionId: response.questionId,
-    //       questionnaireId: response.questionnaireId,
-    //       userId: response.userId,
-    //       answer: response.answer,
-    //     },
-    //   });
-    // }
-
-    console.log("Seeding completed successfully!");
-  } catch (error) {
-    console.error("Error seeding data:", error);
-    throw error; // Ensure process exits with non-zero code on error
-  } finally {
-    await prisma.$disconnect();
-  }
+  console.log('La base de données a été initialisée. 🌱');
 }
 
 main()
   .catch((e) => {
     console.error(e);
     process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
   });

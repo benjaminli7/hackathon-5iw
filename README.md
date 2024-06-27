@@ -20,14 +20,29 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## OLLAMA
+
+Installer Mistral avec Ollama
+
+```bash
+<<<<<<< Updated upstream
+    ollama run mistral
+=======
+ollama serve
+ollama run mistral
+>>>>>>> Stashed changes
+```
+
+http://localhost:11434/api/generate
+
 ## Prisma
 
 ```bash
-npx prisma generate
-npx prisma migrate dev
+    npx prisma generate
+    npx prisma migrate dev
 
-# to open prisma adminer
-npx prisma studio
+    # to open prisma adminer
+    npx prisma studio
 ```
 
 ## Run seeds
