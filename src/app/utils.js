@@ -75,7 +75,7 @@ export const changeBotAnswerFromUserInfo = cache(async (answer, name) => {
     model: "gpt-4o",
   });
 
-
+});
 // getAgeFromPrompt("Salut, comment ça va ?", "Robert").then((res) => {
 //   console.log(res);
 // });
