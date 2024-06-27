@@ -202,18 +202,18 @@
   resolved "https://registry.npmjs.org/@mantine/modals/-/modals-7.10.2.tgz"
   integrity sha512-L/gjPnvokciHOuTXFZqkc5b+ECAGKe/0l0LXlDwM3PvGJs1/Wa4DBCSy3pdGhKv+rMwFr2HiBc8nibCfwaR7IQ==
 
-"@mantine/notifications@^7.10.2":
-  version "7.10.2"
-  resolved "https://registry.npmjs.org/@mantine/notifications/-/notifications-7.10.2.tgz"
-  integrity sha512-wX6qNBvpV7iqlH98AkGuS9plq02yYhTG7bkzP3Y7jd7o2ognLPoN83YeIaxzuZ/qVnWrwZrOHOx87Ox2e9Qyxw==
+"@mantine/notifications@^7.11.0":
+  version "7.11.0"
+  resolved "https://registry.yarnpkg.com/@mantine/notifications/-/notifications-7.11.0.tgz#9289221bbeed23030360a3c363835e1aa0361605"
+  integrity sha512-UtAHJoSi4s+lfVZrkUDWMlg6j0w1LZaiMEOBMG9p5MV5dP38W75LeCy2cio2Znji2S5YzXaZolOkHBT5ZONKAw==
   dependencies:
-    "@mantine/store" "7.10.2"
+    "@mantine/store" "7.11.0"
     react-transition-group "4.4.5"
 
-"@mantine/store@7.10.2":
-  version "7.10.2"
-  resolved "https://registry.npmjs.org/@mantine/store/-/store-7.10.2.tgz"
-  integrity sha512-izT4ivE2Ka2NBTjy5Ck31F3sSybCBLXJhX/ESDCasVR9MKD2Ci2Y6nbm0UtBdPf4+PrDPZtaPwqQzL92uZLtCQ==
+"@mantine/store@7.11.0":
+  version "7.11.0"
+  resolved "https://registry.yarnpkg.com/@mantine/store/-/store-7.11.0.tgz#2b8921730486931fc0cd88a52886f11aebd858d9"
+  integrity sha512-zPmOpdFgvkUqYKSK7NNKbhgXsh2QPw51m3iypTaj0mw+rZbk3WSH9vZvaEx59X0QG+ahwUg2/HezbjfXFUbvrA==
 
 "@next/env@14.2.4":
   version "14.2.4"
@@ -2279,6 +2279,11 @@ minimist@^1.2.0, minimist@^1.2.6:
   resolved "https://registry.npmjs.org/minipass/-/minipass-7.1.2.tgz"
   integrity sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==
 
+mitt@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/mitt/-/mitt-3.0.1.tgz#ea36cf0cc30403601ae074c8f77b7092cdab36d1"
+  integrity sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==
+
 ms@2.1.2, ms@^2.1.1:
   version "2.1.2"
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
@@ -2347,6 +2352,13 @@ normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/normalize-path/-/normalize-path-3.0.0.tgz"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
+
+nuqs@^1.17.4:
+  version "1.17.4"
+  resolved "https://registry.yarnpkg.com/nuqs/-/nuqs-1.17.4.tgz#c82fcf62da38939c1c47aeb9efc8f4521b11ad0f"
+  integrity sha512-wraphFfKI+Y/aWIGFsld/Ta7fTFEyeya1LkgEGNPDiMuY+Hwea/eVHBiq1GYlyMqTYSAoxRWvQyjCIo1Dy1u7g==
+  dependencies:
+    mitt "^3.0.1"
 
 object-assign@^4.0.1, object-assign@^4.1.1:
   version "4.1.1"
