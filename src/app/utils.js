@@ -84,6 +84,7 @@ export const setEstimatedAgeFromPrompt = cache(async (discussion, phone) => {
     model: "gpt-4o",
   });
 
+
   // console.log(
   //   "Par le nom le bot a estimé l'age à ",
   //   responsePerName.choices[0]?.message?.content,

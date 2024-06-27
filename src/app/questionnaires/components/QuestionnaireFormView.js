@@ -2,7 +2,7 @@
 
 import { addChoices } from "@/api/actions";
 import QuestionnaireForm from "@/app/questionnaires/components/QuestionnaireForm";
-import { Alert, Button, Stack } from "@mantine/core";
+import { Alert, Button, Center, Stack, Text, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { IconInfoCircle } from "@tabler/icons-react";
@@ -12,6 +12,7 @@ import { useState } from "react";
 function QuestionnaireFormView({ questionnaire, userAge }) {
   const [id, setId] = useQueryState("id", parseAsInteger.withDefault(null));
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const [error, setError] = useState(null);
   const questionsLength = questionnaire.questions.length;
@@ -20,7 +21,8 @@ function QuestionnaireFormView({ questionnaire, userAge }) {
       responses: [],
     },
   });
-
+  const isYoung = false;
+  console.log("young", isYoung)
   const handleSubmit = async (values) => {
     if (values.responses.length !== questionsLength) {
       setError({
@@ -54,27 +56,45 @@ function QuestionnaireFormView({ questionnaire, userAge }) {
         message: "Vos retours ont bien été envoyés",
         color: "green",
       });
+      setSuccess(true);
     }
     setLoading(false);
   };
-
   return (
-    <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
-      <Stack>
-        <QuestionnaireForm form={form} questionnaire={questionnaire} />
-        {error?.message && (
-          <Alert
-            variant="light"
-            color="red"
-            title={error.message}
-            icon={<IconInfoCircle size={16} />}
-          />
-        )}
-        <Button type="submit" mt={12} loading={loading}>
-          Envoyer
-        </Button>
-      </Stack>
-    </form>
+
+    <>
+      {!success ? (
+        <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+          <Stack>
+            <QuestionnaireForm form={form} questionnaire={questionnaire} />
+            {error?.message && (
+              <Alert
+                variant="light"
+                color="red"
+                title={error.message}
+                icon={<IconInfoCircle size={16} />}
+              />
+            )}
+            <Button type="submit" mt={12} loading={loading}>
+              Envoyer
+            </Button>
+          </Stack>
+        </form>
+      ) : (
+        <Center mt={12}>
+          <Stack align="center">
+            <Title ta="center">
+              {"Merci d'avoir répondu à ce questionnaire !"}
+            </Title>
+            <Text>
+              Vos retours ont bien été envoyés, vous pouvez désormais fermer
+              cette page
+            </Text>
+          </Stack>
+        </Center>
+      )}
+    </>
+
   );
 }
 
