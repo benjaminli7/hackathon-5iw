@@ -22,10 +22,15 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## OLLAMA
 
-Installer OLLAMA
+Installer Mistral avec Ollama
 
 ```bash
+<<<<<<< Updated upstream
     ollama run mistral
+=======
+ollama serve
+ollama run mistral
+>>>>>>> Stashed changes
 ```
 
 http://localhost:11434/api/generate

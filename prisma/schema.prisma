@@ -12,6 +12,7 @@ model User {
   email     String?     @unique
   name      String?
   responses Response[]
+  messages  Message[]
 }
 
 model Questionnaire {
@@ -43,4 +44,13 @@ model Response {
   choiceId Int
   choice   Choice @relation(fields: [choiceId], references: [id])
   user     User   @relation(fields: [userId], references: [id])
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  sender    String
+  content   String
+  timestamp DateTime @default(now())
 }
