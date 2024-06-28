@@ -5,7 +5,7 @@ import { Flex, Paper, Radio, Stack } from "@mantine/core";
 function QuestionAnswer({ form, question, index, isYoung }) {
   const paperClass = isYoung ? "border border-solid border-2 border-orange-300 p-4" : "border-solid border-2 border-white-300 shadow-xs p-4";
   const radioClass = isYoung? "text-xl" : "text-4xl text-white-800 font-bold py-8 px-9 rounded ";
-  console.log("radioClass", radioClass)
+  // console.log("isYoung", isYoung)
   return (
     <Paper className={paperClass}>
       <Stack>

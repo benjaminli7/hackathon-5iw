@@ -13,14 +13,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  let isYoung = true;
+
   return (
     <html lang="en">
       <head>
-        <ColorSchemeScript defaultColorScheme={isYoung ? "dark" : "white"} />
+        <ColorSchemeScript defaultColorScheme="white" />
       </head>
       <body>
-        <MantineProvider defaultColorScheme={isYoung ? "dark" : "white"}>
+        <MantineProvider defaultColorScheme="white">
           <Notifications />
           <main className="container py-3 mx-auto">{children}</main>
         </MantineProvider>

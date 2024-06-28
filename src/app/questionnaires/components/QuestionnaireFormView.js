@@ -24,6 +24,7 @@ function QuestionnaireFormView({ questionnaire, userAge }) {
 
   const isYoung = userAge > 45 ? false : true;
 
+
   const handleSubmit = async (values) => {
     if (values.responses.length !== questionsLength) {
       setError({
