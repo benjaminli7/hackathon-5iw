@@ -1,8 +1,11 @@
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
-    "email" TEXT NOT NULL,
+    "phoneNumber" TEXT NOT NULL,
+    "email" TEXT,
     "name" TEXT,
+    "age" INTEGER,
+    "isEstimated" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -43,8 +46,36 @@ CREATE TABLE "Response" (
     CONSTRAINT "Response_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Message" (
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "sender" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "contentIA" TEXT NOT NULL,
+    "timestamp" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Message_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ConversationScript" (
+    "id" SERIAL NOT NULL,
+    "operation" TEXT NOT NULL,
+    "order" INTEGER NOT NULL,
+    "content" TEXT NOT NULL,
+
+    CONSTRAINT "ConversationScript_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_phoneNumber_key" ON "User"("phoneNumber");
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "ConversationScript_operation_key" ON "ConversationScript"("operation");
 
 -- AddForeignKey
 ALTER TABLE "Question" ADD CONSTRAINT "Question_questionnaireId_fkey" FOREIGN KEY ("questionnaireId") REFERENCES "Questionnaire"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -57,3 +88,6 @@ ALTER TABLE "Response" ADD CONSTRAINT "Response_choiceId_fkey" FOREIGN KEY ("cho
 
 -- AddForeignKey
 ALTER TABLE "Response" ADD CONSTRAINT "Response_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Message" ADD CONSTRAINT "Message_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

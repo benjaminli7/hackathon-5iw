@@ -14,26 +14,6 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## OLLAMA
-
-Installer Mistral avec Ollama
-
-```bash
-<<<<<<< Updated upstream
-    ollama run mistral
-=======
-ollama serve
-ollama run mistral
->>>>>>> Stashed changes
-```
-
-http://localhost:11434/api/generate
 
 ## Prisma
 
@@ -51,21 +31,20 @@ http://localhost:11434/api/generate
 pnpm seed
 ```
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Fonctionnalités
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Call a l'API openAI pour determiner l'age -> Sebastien Yalicheff
+Call a l'API openAI pour modifier les messages -> Sebastien Yalicheff
+Page de chat -> Alexandre Samson
+Formulaires avec frontend modifiable -> Benjamin Li et Camille Borra
 
-## Deploy on Vercel
+# Pseudo
+syalicheff ->Sébastien YALICHEFF
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Agraval-> Alexandre SAMSON
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+CamilleBorra ->Camille BORRA
 
-# hackathon-5iw
-
-# hackathon-5iw
+benjaminli7->Benjamin Li

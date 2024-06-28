@@ -1,86 +1,145 @@
 [
-  [
-    {
-      "id": 1,
-      "bot": "Bonjour, comment vous sentez-vous aujourd'hui après votre opération ?",
-      "client": "Salut, je me sens bien reposé aujourd'hui."
-    },
-    {
-      "id": 2,
-      "bot": "Avez-vous ressenti une douleur particulière ou un inconfort aujourd'hui ?",
-      "client": "Nan pas de douleur."
-    },
-    {
-      "id": 3,
-      "bot": "Merci pour votre retour. Sur une échelle de 1 à 10, comment évalueriez-vous cette douleur ?",
-      "client": "1"
-    },
-    {
-      "id": 4,
-      "bot": "D'accord. Avez-vous pris vos médicaments contre la douleur comme prescrit ?",
-      "client": "Ouai c'est fait."
-    },
-    {
-      "id": 5,
-      "bot": "Parfait. Avez-vous pu manger normalement aujourd'hui ?",
-      "client": "Oui, j'ai pu manger sans problème."
-    },
-    {
-      "id": 6,
-      "bot": "Très bien. Avez-vous remarqué une rougeur, un gonflement ou une chaleur inhabituelle autour de l'incision ?",
-      "client": "RAS."
-    },
-    {
-      "id": 7,
-      "bot": "C'est rassurant. Avez-vous des questions ou des préoccupations concernant votre rétablissement ?",
-      "client": "Non, je ne m'inquiète de rien pour le moment."
-    },
-    {
-      "id": 8,
-      "bot": "Excellent. Nous vous recontacterons demain pour un nouveau suivi. En cas de problème urgent, n'hésitez pas à appeler votre médecin. Bonne journée !",
-      "client": "Merci au revoir"
-    }
-  ],
-  [
-    {
-      "id": 1,
-      "bot": "Bonjour, comment vous sentez-vous aujourd'hui après votre opération ?",
-      "client": "Bonjour, je me sens un peu fatigué mais ça va mieux qu'hier."
-    },
-    {
-      "id": 2,
-      "bot": "Avez-vous ressenti une douleur particulière ou quelque chose d'inconfortable aujourd'hui ?",
-      "client": "Oui, j'ai ressenti une certaine gêne là où ils m'ont opéré, surtout en bougeant."
-    },
-    {
-      "id": 3,
-      "bot": "Merci pour votre retour. Sur une échelle de 1 à 10, à quel point évaluez-vous cette douleur ?",
-      "client": "Je dirais autour de 6."
-    },
-    {
-      "id": 4,
-      "bot": "Ok. Vous avez pris vos médicaments contre la douleur comme indiqué ?",
-      "client": "Oui, je les ai pris ce matin comme prescrit."
-    },
-    {
-      "id": 5,
-      "bot": "Super. Avez-vous pu manger normalement aujourd'hui ?",
-      "client": "Oui, aucun souci pour manger."
-    },
-    {
-      "id": 6,
-      "bot": "Parfait. Avez-vous remarqué quelque chose d'anormal comme une rougeur, un gonflement ou une chaleur près de l'incision ?",
-      "client": "Non, tout semble normal à ce niveau-là."
-    },
-    {
-      "id": 7,
-      "bot": "Bien. Avez-vous des questions ou des préoccupations concernant votre rétablissement ?",
-      "client": "Non, je pense que tout va bien pour le moment."
-    },
-    {
-      "id": 8,
-      "bot": "Génial. On vous rappellera demain pour voir comment ça évolue. En cas de problème urgent, n'hésitez pas à appeler votre médecin. Passez une bonne journée !",
-      "client": "Merci, à plus tard !"
-    }
-  ]
+  {
+    "userId": 1,
+    "sender": "bot",
+    "content": "Bonjour, comment vous sentez-vous aujourd'hui après votre operation ?",
+    "contentIA": "",
+    "operation": "genoux"
+  },
+  {
+    "userId": 1,
+    "sender": "Timméo",
+    "content": "Salut ça va tranquille et toi ?",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 1,
+    "sender": "bot",
+    "content": "Avez-vous ressenti une douleur particulière ou un inconfort aujourd'hui ?",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 1,
+    "sender": "Timméo",
+    "content": "g mal au genoux",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 1,
+    "sender": "bot",
+    "content": "Merci pour votre retour. Sur une échelle de 1 à 10, comment évalueriez-vous cette douleur ?",
+    "contentIA": "",
+        "operation": "genoux"
+
+  },
+  {
+    "userId": 1,
+    "sender": "Timméo",
+    "content": "2",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 1,
+    "sender": "bot",
+    "content": "D'accord. Avez-vous pris vos médicaments contre la douleur comme prescrit ?",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 1,
+    "sender": "Timméo",
+    "content": "ouai c bon",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 1,
+    "sender": "bot",
+    "content": "Parfait. Avez-vous pu manger normalement aujourd'hui ?",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 1,
+    "sender": "Timméo",
+    "content": "Oui",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 1,
+    "sender": "bot",
+    "content": "Très bien. Avez-vous remarqué une rougeur, un gonflement ou une chaleur inhabituelle autour de l'incision ?",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 2,
+    "sender": "bot",
+    "content": "Bonjour, comment vous sentez-vous aujourd'hui après votre operation ?",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 2,
+    "sender": "Jean-Jacques",
+    "content": "Bonjour, je me sens un peu fatigué mais ça va mieux qu'hier.",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 2,
+    "sender": "bot",
+    "content": "Avez-vous ressenti une douleur particulière ou quelque chose d'inconfortable aujourd'hui ?",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 2,
+    "sender": "Jean-Jacques",
+    "content": "Oui, j'ai ressenti une certaine gêne là où ils m'ont opéré, surtout en bougeant.",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 2,
+    "sender": "bot",
+    "content": "Ok. Vous avez pris vos médicaments contre la douleur comme indiqué ?",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 2,
+    "sender": "Jean-Jacques",
+    "content": "Oui, je les ai pris ce matin comme prescrit.",
+    "contentIA": "",
+    "operation": "genoux"
+
+  },
+  {
+    "userId": 2,
+    "sender": "bot",
+    "content": "Super. Avez-vous pu manger normalement aujourd'hui ?",
+    "contentIA": "",
+    "operation": "genoux"
+
+  }
 ]

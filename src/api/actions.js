@@ -27,46 +27,56 @@ export async function addChoices(values) {
         },
       });
 
-      if(response) {
+      if (response) {
         await prisma.response.update({
           where: {
-            id: response.id
+            id: response.id,
           },
           data: {
             choice: {
               connect: {
-                id: value.choiceId
-              }
-            }
-          }
-        })
+                id: value.choiceId,
+              },
+            },
+          },
+        });
       } else {
-
         await prisma.response.create({
-            data: {
+          data: {
             user: {
-                connect: {
+              connect: {
                 id: value.userId,
-                },
+              },
             },
             choice: {
-                connect: {
+              connect: {
                 id: value.choiceId,
-                },
+              },
             },
-            },
+          },
         });
       }
-
     });
 
     return {
       success: true,
-    }
+    };
   } catch (e) {
     console.log(e.message);
     return {
       error: e.message,
     };
   }
+}
+
+export async function patchAge(userId, age) {
+  console.log("changement de l'age de l'utilisateur ", userId, age);
+  await prisma.user.update({
+    where: {
+      id: parseInt(userId),
+    },
+    data: {
+      age: age,
+    },
+  });
 }

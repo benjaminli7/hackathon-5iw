@@ -1,4 +1,6 @@
 import { PrismaClient } from '@prisma/client';
+import fs from 'fs';
+
 
 const prisma = new PrismaClient();
 
@@ -6,8 +8,17 @@ async function main() {
   // Créer un utilisateur
   const user = await prisma.user.create({
     data: {
-      email: 'patient1@example.com',
-      name: 'John Doe'
+      email: 'patient@example.com',
+      phoneNumber: '+33612345678',
+      name: 'Timméo '
+    },
+  });
+
+  const user2 = await prisma.user.create({
+    data: {
+      email: 'patient2@example.com',
+      phoneNumber: '+3393032021',
+      name: 'Jean-Jacques'
     },
   });
 
@@ -16,6 +27,7 @@ async function main() {
     data: {
       title: 'Questionnaire Post-Opératoire Chirurgie du Genou',
       description: 'Ce questionnaire vise à recueillir les retours des patients après une chirurgie du genou.',
+      operation: 'genoux',
       questions: {
         create: [
           {
@@ -64,43 +76,64 @@ async function main() {
     },
   });
 
-  // Exemples de réponses de l'utilisateur
-  await prisma.response.create({
-    data: {
-      userId: user.id,
-      choiceId: (await prisma.choice.findFirst({ where: { text: '1', question: { text: 'Comment évalueriez-vous votre douleur sur une échelle de 1 à 4 ?' } } }))?.id!
-    },
-  });
 
-  await prisma.response.create({
-    data: {
-      userId: user.id,
-      choiceId: (await prisma.choice.findFirst({ where: { text: 'Satisfait', question: { text: 'Êtes-vous satisfait de l\'amplitude de mouvement de votre genou ?' } } }))?.id!
+  // Création d'un script de conversation pour une opération du genou
+  const script = [
+    {
+      operation: "genoux",
+      order: 1,
+      content: "Seriez vous apte a répondre a un formulaire plus détaillé ?"
     },
-  });
-
-  await prisma.response.create({
-    data: {
-      userId: user.id,
-      choiceId: (await prisma.choice.findFirst({ where: { text: 'Non', question: { text: 'Avez-vous ressenti un gonflement du genou ?' } } }))?.id!
+    {
+      operation: "genoux",
+      order: 2,
+      content: "Votre plaie s'est elle bien refermé depuis l'opération ?"
     },
-  });
+    {
+      operation: "genoux",
+      order: 3,
+      content: "D'accord je note, avez vous d'autres remarques à faire ?"
+    }
+  ];
 
-  await prisma.response.create({
-    data: {
-      userId: user.id,
-      choiceId: (await prisma.choice.findFirst({ where: { text: 'Oui', question: { text: 'Pouvez-vous marcher sans assistance ?' } } }))?.id!
-    },
-  });
+  for (const content of script) {
+    await prisma.conversationScript.create({
+      data: {
+        operation: content.operation,
+        order: content.order,
+        content: content.content
+      }
+    });
+  }
 
-  console.log('La base de données a été initialisée. 🌱');
+  // Exemples de messages de l'utilisateur
+
+  const conversation =  fs.readFileSync('./prisma/conversation.json',  'utf8');
+  
+  for(const content of JSON.parse(conversation)){
+    await prisma.message.create({
+      data: {
+        user: {
+          connect: {
+            id: content.userId
+          }
+        },
+        sender: content.sender,
+        operation: content.operation,
+        content: content.content,
+        contentIA: ""
+      }
+    });
+  }
+
+  console.log('La base de données a été initialisée avec des utilisateurs, des réponses et des messages. 🌱');
 }
 
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+    .catch((e) => {
+      console.error(e);
+      process.exit(1);
+    })
+    .finally(async () => {
+      await prisma.$disconnect();
+    });
