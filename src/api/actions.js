@@ -68,3 +68,15 @@ export async function addChoices(values) {
     };
   }
 }
+
+export async function patchAge(userId, age) {
+  console.log("changement de l'age de l'utilisateur ", userId, age);
+  await prisma.user.update({
+    where: {
+      id: parseInt(userId),
+    },
+    data: {
+      age: age,
+    },
+  });
+}

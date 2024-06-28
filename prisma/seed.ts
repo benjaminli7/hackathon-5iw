@@ -1,4 +1,6 @@
 import { PrismaClient } from '@prisma/client';
+import fs from 'fs';
+
 
 const prisma = new PrismaClient();
 
@@ -8,7 +10,15 @@ async function main() {
     data: {
       email: 'patient@example.com',
       phoneNumber: '+33612345678',
-      name: 'Jean Dupont'
+      name: 'Timméo '
+    },
+  });
+
+  const user2 = await prisma.user.create({
+    data: {
+      email: 'patient2@example.com',
+      phoneNumber: '+3393032021',
+      name: 'Jean-Jacques'
     },
   });
 
@@ -17,6 +27,7 @@ async function main() {
     data: {
       title: 'Questionnaire Post-Opératoire Chirurgie du Genou',
       description: 'Ce questionnaire vise à recueillir les retours des patients après une chirurgie du genou.',
+      operation: 'genoux',
       questions: {
         create: [
           {
@@ -65,95 +76,23 @@ async function main() {
     },
   });
 
-  // Exemples de réponses de l'utilisateur
-  const choice1 = await prisma.choice.findFirst({
-    where: {
-      text: '1',
-      question: {
-        text: 'Comment évalueriez-vous votre douleur sur une échelle de 1 à 4 ?'
-      }
-    }
-  });
-
-  if (choice1) {
-    await prisma.response.create({
-      data: {
-        userId: user.id,
-        choiceId: choice1.id
-      },
-    });
-  }
-
-  const choice2 = await prisma.choice.findFirst({
-    where: {
-      text: 'Satisfait',
-      question: {
-        text: 'Êtes-vous satisfait de l\'amplitude de mouvement de votre genou ?'
-      }
-    }
-  });
-
-  if (choice2) {
-    await prisma.response.create({
-      data: {
-        userId: user.id,
-        choiceId: choice2.id
-      },
-    });
-  }
-
-  const choice3 = await prisma.choice.findFirst({
-    where: {
-      text: 'Non',
-      question: {
-        text: 'Avez-vous ressenti un gonflement du genou ?'
-      }
-    }
-  });
-
-  if (choice3) {
-    await prisma.response.create({
-      data: {
-        userId: user.id,
-        choiceId: choice3.id
-      },
-    });
-  }
-
-  const choice4 = await prisma.choice.findFirst({
-    where: {
-      text: 'Oui',
-      question: {
-        text: 'Pouvez-vous marcher sans assistance ?'
-      }
-    }
-  });
-
-  if (choice4) {
-    await prisma.response.create({
-      data: {
-        userId: user.id,
-        choiceId: choice4.id
-      },
-    });
-  }
 
   // Création d'un script de conversation pour une opération du genou
   const script = [
     {
       operation: "genoux",
       order: 1,
-      content: "Bonjour, suite à votre opération du genoux nous souhaitons prendre de vos nouvelles. Ensuite nous vous enverrons un questionnaire pour évaluer votre état de santé."
+      content: "Seriez vous apte a répondre a un formulaire plus détaillé ?"
     },
     {
       operation: "genoux",
       order: 2,
-      content: "Comment allez vous depuis votre opération ?"
+      content: "Votre plaie s'est elle bien refermé depuis l'opération ?"
     },
     {
       operation: "genoux",
       order: 3,
-      content: "Avez vous pris le rendez vous avec le kiné ?"
+      content: "D'accord je note, avez vous d'autres remarques à faire ?"
     }
   ];
 
@@ -168,45 +107,24 @@ async function main() {
   }
 
   // Exemples de messages de l'utilisateur
-  await prisma.message.createMany({
-    data: [
-      {
-        userId: user.id,
-        sender: 'John Doe',
-        content: 'Bonjour, j\'ai quelques questions concernant mon traitement.',
-        contentIA: '',
-        timestamp: new Date()
-      },
-      {
-        userId: user.id,
-        sender: 'John Doe',
-        content: 'Je ressens encore une douleur après l\'opération.',
-        contentIA: '',
-        timestamp: new Date()
-      },
-      {
-        userId: user.id,
-        sender: 'Bot',
-        content: 'Bonjour John, pouvez-vous préciser l\'intensité de la douleur sur une échelle de 1 à 10 ?',
-        contentIA: 'Pouvez-vous préciser l\'intensité de la douleur sur une échelle de 1 à 10 ?',
-        timestamp: new Date()
-      },
-      {
-        userId: user.id,
-        sender: 'John Doe',
-        content: 'Je dirais que c\'est environ 7.',
-        contentIA: '',
-        timestamp: new Date()
-      },
-      {
-        userId: user.id,
-        sender: 'Bot',
-        content: 'Merci pour votre retour, nous allons ajuster votre traitement en conséquence.',
-        contentIA: 'Nous allons ajuster votre traitement en conséquence.',
-        timestamp: new Date()
+
+  const conversation =  fs.readFileSync('./prisma/conversation.json',  'utf8');
+  
+  for(const content of JSON.parse(conversation)){
+    await prisma.message.create({
+      data: {
+        user: {
+          connect: {
+            id: content.userId
+          }
+        },
+        sender: content.sender,
+        operation: content.operation,
+        content: content.content,
+        contentIA: ""
       }
-    ]
-  });
+    });
+  }
 
   console.log('La base de données a été initialisée avec des utilisateurs, des réponses et des messages. 🌱');
 }

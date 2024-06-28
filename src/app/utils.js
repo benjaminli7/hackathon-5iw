@@ -1,11 +1,11 @@
+"use server";
 import prisma from "../../lib/prisma";
 import { cache } from "react";
 // import useOpenAI from "@/hooks/useOpenAI";
 import { OpenAI } from "openai";
-import { connect } from "http2";
-const json = require("../../prisma/conversation.json");
-const jeune = json[0];
-const vieux = json[1];
+// const json = require("../../prisma/conversation.json");
+// const jeune = json[0];
+// const vieux = json[1];
 // console.log(adulte);
 
 const openai = new OpenAI({
@@ -25,12 +25,12 @@ export const getUsers = cache(async () => {
 //   });
 // });
 
-export const setEstimatedAgeFromPrompt = cache(async (discussion, phone) => {
+export const setEstimatedAgeFromPrompt = cache(async (discussion, userId) => {
   let responsePerName = null;
   let responsePerVocabulary = null;
   const user = await prisma.user.findUnique({
     where: {
-      phoneNumber: phone,
+      id: Number(userId),
     },
   });
   if (!user) {
@@ -40,24 +40,6 @@ export const setEstimatedAgeFromPrompt = cache(async (discussion, phone) => {
   if (user.age && !user.isEstimated) {
     return user.age;
   }
-
-  // const response = await openai.chat.completions.create({
-  //   messages: [
-  //     {
-  //       role: "user",
-  //       content: `Estime l'âge de la personne en fonction de cette discussions ${JSON.stringify(
-  //         vieux.map((message) => message.client)
-  //       )} ${
-  //         user.name
-  //           ? "dans cette conversation le client s'appelle " + user.name
-  //           : ""
-  //       } Répond obligatoirement par l'age de la personne ne dit pas que tu ne sais pas si tu ne sait pas éstime l'age de la personne, tu dois ne donner que l'age de la personne dans la réponse par exemple: 45
-  //       En terme de degré d'importance le nom représente 30% le vocabulaire et la syntaxe 70% de la réponse.
-  //       `,
-  //     },
-  //   ],
-  //   model: "gpt-4o",
-  // });
 
   if (user.name) {
     responsePerName = await openai.chat.completions.create({
@@ -84,42 +66,26 @@ export const setEstimatedAgeFromPrompt = cache(async (discussion, phone) => {
     model: "gpt-4o",
   });
 
-
-  // console.log(
-  //   "Par le nom le bot a estimé l'age à ",
-  //   responsePerName.choices[0]?.message?.content,
-  //   "par le vocabulaire le bot a estimé l'age à ",
-  //   responsePerVocabulary.choices[0]?.message?.content
-  // );
-
-  // LA FACON DE PARLER ETANT PLUS DETERMINANTE QUE LE NOM ON VA APPLIQUER UN COEFICIENT DE 20% ET -20% SUR LA REPONSE DU NOM
-  // moyenne des deux estimations en appliquant un coeficient de 25% et -25% sur la réponse du nom
   const agePerName = responsePerName?.choices[0]?.message?.content
     ? parseInt(responsePerName?.choices[0]?.message?.content)
     : responsePerVocabulary?.choices[0]?.message?.content;
   const agePerVocabulary = responsePerVocabulary.choices[0]?.message?.content;
+  console.log("agePerName", agePerName);
+  console.log("agePerVocabulary", agePerVocabulary);
+  console.log("agePerName", agePerName * 0.75);
+  console.log("agePerVocabulary", agePerVocabulary * 1.25);
 
   const estimatedAge = Math.round(
     (parseInt(agePerName) * 0.75 + parseInt(agePerVocabulary) * 1.25) / 2
   );
 
-  const updatedUser = await prisma.user.update({
-    where: {
-      phoneNumber: user.phoneNumber,
-    },
-    data: {
-      age: estimatedAge,
-      isEstimated: true,
-    },
-  });
-
-  return updatedUser;
+  return estimatedAge;
 });
 
-export const changeBotAnswerFromUserInfo = cache(async (answer, user) => {
+export const changeBotAnswerFromUserInfo = cache(async (answer, userId) => {
   const client = await prisma.user.findUnique({
     where: {
-      phoneNumber: user.phoneNumber,
+      id: userId,
     },
   });
 
@@ -148,14 +114,6 @@ export const changeBotAnswerFromUserInfo = cache(async (answer, user) => {
     const botAnswer = response.choices[0]?.message?.content;
 
     // add this message to the database
-    await prisma.message.create({
-      data: {
-        userId: client.id,
-        sender: "bot",
-        content: answer,
-        contentIA: botAnswer,
-      },
-    });
 
     return botAnswer;
   } catch (error) {
