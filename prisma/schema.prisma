@@ -8,20 +8,22 @@ datasource db {
 }
 
 model User {
-  id          Int        @id @default(autoincrement())
-  phoneNumber String     @unique
-  email       String?    @unique
-  name        String?
-  responses   Response[]
-  messages    Message[]
-  age         Int?
-  isEstimated Boolean    @default(false)
+  id                 Int                  @id @default(autoincrement())
+  phoneNumber        String               @unique
+  email              String?              @unique
+  name               String?
+  responses          Response[]
+  messages           Message[]
+  age                Int?
+  isEstimated        Boolean              @default(false)
+  UserScriptProgress UserScriptProgress[]
 }
 
 model Questionnaire {
   id          Int        @id @default(autoincrement())
   title       String
   description String?
+  operation   String?
   questions   Question[]
 }
 
@@ -54,14 +56,27 @@ model Message {
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
   sender    String
+  operation String
   content   String
   contentIA String
   timestamp DateTime @default(now())
 }
 
-model ConversationScript{
-  id        Int      @id @default(autoincrement())
-  operation String
-  order     Int
-  content   String
+model ConversationScript {
+  id                 Int                  @id @default(autoincrement())
+  operation          String
+  order              Int
+  content            String
+  UserScriptProgress UserScriptProgress[]
+}
+
+model UserScriptProgress {
+  id          Int                @id @default(autoincrement())
+  userId      Int
+  scriptId    Int
+  currentStep Int
+  script      ConversationScript @relation(fields: [scriptId], references: [id])
+  user        User               @relation(fields: [userId], references: [id])
+
+  @@unique([userId, scriptId])
 }
